@@ -4,8 +4,7 @@ import Logo from "../assets/Logo.svg";
 import { useSelector } from "react-redux";
 
 const Header = () => {
-  const { cartItems } = useSelector((state) => state.cartReducer);
-
+  const items = useSelector((state) => state.cart.items);
   return (
     <>
       <header>
@@ -17,7 +16,7 @@ const Header = () => {
           <NavLink to="/">Home</NavLink>
           <NavLink to="cart">
             <AiOutlineShoppingCart />
-            <p>{cartItems.length > 0 ? cartItems.length : 0}</p>
+            <p>{items.length > 0 ? items.length : 0}</p>
           </NavLink>
         </nav>
       </header>

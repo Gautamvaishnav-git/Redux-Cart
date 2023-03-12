@@ -1,65 +1,53 @@
-import { createAction, createReducer } from "@reduxjs/toolkit";
-
-const addToCart = createAction("addToCart");
-const increment = createAction("increment");
-const decrement = createAction("decrement");
-const deleteHandler = createAction("deleteHandler");
-const getTotal = createAction("getTotal");
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  cartItems: [],
-  subtotal: 0,
-  shipping: 0,
-  tax: 0,
-  total: 0,
+  items: [],
 };
 
-const cartReducer = createReducer(initialState, (builder) => {
-  builder
-    .addCase(addToCart, (state, action) => {
-      const item = action.payload;
-      const isExist = state.cartItems.find((i) => i.id === item.id);
-
-      if (isExist) {
-        state.cartItems.forEach((i) => {
-          if (i.id === item.id) i.quantity++;
+const cartSlice = createSlice({
+  name: "cart",
+  initialState,
+  reducers: {
+    addToCart: (state, action) => {
+      const isExists = state.items.find(
+        (item) => item.id === action.payload.id
+      );
+      if (isExists) {
+        state.items.forEach((item) => {
+          if (item.id === isExists.id) {
+            item.quantity++;
+          }
         });
       } else {
-        state.cartItems.push(item);
+        state.items.push(action.payload);
       }
-    })
-    .addCase(increment, (state, action) => {
+    },
+    increament: (state, action) => {
       let id = action.payload;
-      state.cartItems.forEach((item) => {
+      state.items.forEach((item) => {
         if (item.id === id) {
           item.quantity++;
         }
       });
-    })
-    .addCase(decrement, (state, action) => {
-      let id = action.payload;
-      state.cartItems.forEach((item) => {
-        if (item.quantity > 1) {
-          if (item.id === id) {
+    },
+    decrement: (state, action) => {
+      state.items.forEach((item) => {
+        if (item.id === action.payload) {
+          if (item.quantity > 1) {
             item.quantity--;
           }
         }
       });
-    })
-    .addCase(deleteHandler, (state, action) => {
-      state.cartItems = state.cartItems.filter(
-        (item) => item.id !== action.payload
-      );
-    })
-    .addCase(getTotal, (state) => {
-      let sum = 0;
-      state.cartItems.forEach((item) => {
-        sum += item.price * item.quantity;
+    },
+    deleteProduct: (state, action) => {
+      let id = action.payload;
+      state.items = state.items.filter((item) => {
+        return item.id !== id;
       });
-      state.subtotal = sum;
-      state.shipping = state.subtotal < 1000 ? 0 : 10;
-      state.tax = Math.floor(state.subtotal * 0.18);
-      state.total = state.subtotal + state.shipping + state.tax;
-    });
+    },
+  },
 });
-export default cartReducer;
+
+export const { addToCart, increament, decrement, deleteProduct } =
+  cartSlice.actions;
+export default cartSlice.reducer;

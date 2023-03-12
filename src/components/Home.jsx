@@ -1,37 +1,41 @@
-import ProductCard from "./ProductCard";
-import { toast } from "react-hot-toast";
-import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
-import productList from "./ProductList";
-
+import { useDispatch } from "react-redux";
+import ProductCard from "./ProductCard";
+import { addToCart } from "../redux/cartReducer";
+import Loader from "./Loader";
 const Home = () => {
-  const [products, setProducts] = useState([]);
-  useEffect(() => {
-    setProducts(productList);
-  }, []);
   const dispatch = useDispatch();
-
-  const addToCartHandler = (options) => {
-    toast.success("Added to Cart");
-    dispatch({
-      type: "addToCart",
-      payload: options,
-    });
+  const [list, setList] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [fetchError, setFetchError] = useState(false);
+  const fetchData = async () => {
+    try {
+      let data = await fetch("https://fakestoreapi.com/products");
+      data = await data.json();
+      setList(data);
+      setLoading(false);
+    } catch (err) {
+      setFetchError(true);
+      setLoading(false);
+    }
   };
+
+  useEffect(() => {
+    setTimeout(() => {
+      fetchData();
+    }, 1000);
+  }, []);
+
+  if (fetchError) return <p>Fetch Error!</p>;
 
   return (
     <>
+      {loading && <Loader />}
       <div className="home">
-        {products.map(({ name, id, imgSrc, price }) => (
-          <ProductCard
-            name={name}
-            key={id}
-            id={id}
-            imgSrc={imgSrc}
-            price={price}
-            handler={addToCartHandler}
-          />
-        ))}
+        {list &&
+          list.map((item) => {
+            return <ProductCard {...item} key={item.id} />;
+          })}
       </div>
     </>
   );

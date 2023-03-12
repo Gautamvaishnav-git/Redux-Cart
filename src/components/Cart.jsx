@@ -1,116 +1,52 @@
-import { AiFillDelete, AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
-import EmptyCart from "./EmptyCart";
-import { useSelector, useDispatch } from "react-redux";
-import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import empty_cart from "../assets/empty_cart.svg";
+import { AiOutlineDelete } from "react-icons/ai";
+import { decrement, deleteProduct, increament } from "../redux/cartReducer";
 
 const Cart = () => {
-  const { cartItems, subtotal, shipping, tax, total } = useSelector(
-    (state) => state.cartReducer
-  );
-
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch({
-      type: "getTotal",
-    });
-  }, [cartItems]);
-
-  const increment = (id) => {
-    dispatch({
-      type: "increment",
-      payload: id,
-    });
-  };
-  const decrement = (id) => {
-    dispatch({
-      type: "decrement",
-      payload: id,
-    });
-  };
-
-  const deleteHandler = (id) => {
-    dispatch({
-      type: "deleteHandler",
-      payload: id,
-    });
-  };
-
+  const { items } = useSelector((state) => state.cart);
   return (
     <>
       <div className="cart">
         <main>
-          {cartItems.length > 0 ? (
-            cartItems.map(({ name, price, id, imgSrc, quantity }) => (
-              <CartItem
-                name={name}
-                price={price}
-                id={id}
-                imgSrc={imgSrc}
-                key={id}
-                quantity={quantity}
-                increment={increment}
-                decrement={decrement}
-                deleteHandler={deleteHandler}
-              />
-            ))
+          {items.length > 0 ? (
+            items.map((item) => {
+              return (
+                <div className="cartItem" key={item.id}>
+                  <img src={item.image} alt="image" />
+                  <article>
+                    <h3>{item.title}</h3>
+                    <p>{item.price}</p>
+                  </article>
+                  <div className="buttonGroup">
+                    <button onClick={() => dispatch(decrement(item.id))}>
+                      -
+                    </button>
+                    <p>{item.quantity}</p>
+                    <button onClick={() => dispatch(increament(item.id))}>
+                      +
+                    </button>
+                    <button
+                      className="deleteBtn"
+                      onClick={() => dispatch(deleteProduct(item.id))}
+                    >
+                      <AiOutlineDelete />
+                    </button>
+                  </div>
+                </div>
+              );
+            })
           ) : (
-            <EmptyCart />
+            <div className="empty">
+              <img src={empty_cart} />
+            </div>
           )}
         </main>
-        <aside>
-          <h2>subtotal ${subtotal} </h2>
-          <h2>Shipping ${shipping}</h2>
-          <h2>tax ${tax} </h2>
-          <h2>total ${total} </h2>
-        </aside>
+        <aside></aside>
       </div>
     </>
   );
 };
 
 export default Cart;
-
-const CartItem = ({
-  name,
-  price,
-  id,
-  imgSrc,
-  increment,
-  decrement,
-  deleteHandler,
-  quantity,
-}) => {
-  return (
-    <>
-      <div className="cartItem">
-        <img src={imgSrc} alt={name} />
-        <article>
-          <h3>{name}</h3>
-          <p>{price}</p>
-        </article>
-
-        <div className="buttonGroup">
-          <button
-            onClick={() => {
-              decrement(id);
-            }}
-          >
-            <AiOutlineMinus />
-          </button>
-          <p>{quantity}</p>
-          <button
-            onClick={() => {
-              increment(id);
-            }}
-          >
-            <AiOutlinePlus />
-          </button>
-        </div>
-        <button className="deleteBtn" onClick={() => deleteHandler(id)}>
-          <AiFillDelete />
-        </button>
-      </div>
-    </>
-  );
-};
