@@ -5,7 +5,7 @@ import { decrement, deleteProduct, increament } from "../redux/cartReducer";
 
 const Cart = () => {
   const dispatch = useDispatch();
-  const { items } = useSelector((state) => state.cart);
+  const { items, total } = useSelector((state) => state.cart);
   return (
     <>
       <div className="cart">
@@ -43,7 +43,13 @@ const Cart = () => {
             </div>
           )}
         </main>
-        <aside></aside>
+        {total !== 0 && (
+          <aside>
+            <h2>
+              <span>Total:</span> ${total}
+            </h2>
+          </aside>
+        )}
       </div>
     </>
   );

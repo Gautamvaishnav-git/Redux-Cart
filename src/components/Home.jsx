@@ -1,14 +1,11 @@
-import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useCallback, useEffect, useState } from "react";
 import ProductCard from "./ProductCard";
-import { addToCart } from "../redux/cartReducer";
 import Loader from "./Loader";
 const Home = () => {
-  const dispatch = useDispatch();
   const [list, setList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [fetchError, setFetchError] = useState(false);
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     try {
       let data = await fetch("https://fakestoreapi.com/products");
       data = await data.json();
@@ -18,7 +15,7 @@ const Home = () => {
       setFetchError(true);
       setLoading(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
     setTimeout(() => {
