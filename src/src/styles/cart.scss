@@ -1,0 +1,105 @@
+@import "colors";
+@import "mixins";
+
+.cart {
+  width: 100%;
+  max-width: 1240px;
+  margin: auto;
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  padding: 2rem 0 2rem 1rem;
+
+  main {
+    overflow-y: auto;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    margin: 1rem 0;
+
+    .empty {
+      width: 100%;
+      height: 70vh;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      > img {
+        width: 100%;
+        height: 100%;
+        animation: emptyImageFloat 1.3s linear infinite alternate;
+      }
+      @keyframes emptyImageFloat {
+        from {
+          transform: translateY(-1%);
+        }
+        to {
+          transform: translateY(1%);
+        }
+      }
+    }
+
+    &::-webkit-scrollbar {
+      width: 0.4rem;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: $secondary;
+      border-radius: 1rem;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: rgba(70, 70, 70, 0.3);
+      border-radius: 1rem;
+    }
+    @include cartItem;
+  }
+  aside {
+    width: 300px;
+    height: 80vh;
+    display: flex;
+    align-items: flex-start;
+    padding: 0 1rem;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 1rem 0 0 1rem;
+    box-shadow: -1px 0px 5px #0004;
+
+    > h2 {
+      font-size: 1.2rem;
+      text-transform: capitalize;
+      padding: 0.2rem 0;
+      font-weight: 200;
+
+      &:last-child {
+        width: 100%;
+        border-top: 1px solid $secondary;
+        border-bottom: 1px solid $secondary;
+        font-weight: 500;
+      }
+    }
+  }
+}
+
+.buttonGroup > button,
+.deleteBtn {
+  color: $tertiary;
+  background: $secondary;
+  border-radius: 1rem;
+  width: 2rem;
+  height: 2rem;
+  box-shadow: 1px 1px 4px rgba(70, 70, 70, 0.3);
+  cursor: pointer;
+  transition: all 0.2s ease-in;
+  border: none;
+  &:focus {
+    outline: 1.5px solid $secondary;
+  }
+}

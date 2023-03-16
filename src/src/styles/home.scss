@@ -1,0 +1,91 @@
+.loaderContainer {
+  background: $primary;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+
+  > .loader {
+    height: 7rem;
+    width: 7rem;
+    border-radius: 100%;
+    border-top: 3px solid $tertiary;
+    animation: loader 0.4s linear infinite;
+  }
+  @keyframes loader {
+    from {
+      rotate: 0deg;
+    }
+    to {
+      rotate: 360deg;
+    }
+  }
+}
+
+.home {
+  margin: auto;
+  max-width: 1220px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  font-family: "Roboto", sans-serif;
+
+  > .product {
+    background: $tertiary;
+    padding: 2rem;
+    color: $secondary;
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    flex-grow: 1;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    align-items: flex-start;
+    border-radius: 5px;
+    margin: 2rem;
+    gap: 0.5rem;
+
+    > img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+    &:hover {
+      scale: 1.05;
+    }
+    .buttons {
+      display: flex;
+      gap: 0.5rem;
+      button:nth-child(1) {
+        background: transparent;
+        color: $secondary;
+        font-size: 1.5rem;
+        padding: 0.2rem 0.5rem 0 0.5rem;
+        border-radius: 100%;
+
+        &:hover {
+          background: $secondary;
+          color: white;
+        }
+      }
+      button {
+        padding: 0.5rem 1rem;
+        background: $secondary;
+        border: 0;
+        outline: 0;
+        border-radius: 3px;
+        color: $tertiary;
+        border: 1px solid transparent;
+        transition: all 0.2s ease;
+        cursor: pointer;
+
+        &:hover {
+          background: transparent;
+          border-color: $secondary;
+          color: #000;
+        }
+      }
+    }
+  }
+}

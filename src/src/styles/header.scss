@@ -1,0 +1,64 @@
+header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background: $secondaryDark;
+  box-shadow: 0 2px 5px $primaryDark;
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+
+  .Logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    img {
+      width: 1.5rem;
+    }
+
+    > span {
+      font-family: "Roboto", sans-serif;
+      font-weight: 900;
+    }
+  }
+
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    padding: 0 1rem;
+    a {
+      color: $tertiary;
+      opacity: 0.7;
+      text-decoration: none;
+      font-family: "Roboto", sans-serif;
+      font-weight: 300;
+      transition: all 0.2s ease;
+      font-size: 1.2rem;
+      text-transform: capitalize;
+      position: relative;
+
+      &:hover {
+        opacity: 1;
+      }
+      > p {
+        position: absolute;
+        top: -9px;
+        right: -14px;
+        font-size: 0.7rem;
+        text-align: center;
+        background: $tertiary;
+        color: $secondary;
+        border-radius: 2px;
+        padding: 0.01rem 0.3rem;
+      }
+    }
+    .active {
+      opacity: 1;
+    }
+  }
+}
