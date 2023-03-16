@@ -1,0 +1,58 @@
+@import "./mixins";
+
+.wishlistContainer {
+  width: 100%;
+  padding: 2rem;
+  @include cartItem;
+  .cartItem {
+    width: 70%;
+    .removeFromWishlist {
+      display: flex;
+      height: 100%;
+      padding: 2rem 0;
+      justify-content: flex-end;
+      i {
+        cursor: pointer;
+        font-size: 2rem;
+        position: relative;
+        height: fit-content;
+        &:hover::after {
+          content: attr(title);
+          position: absolute;
+          width: fit-content;
+          height: fit-content;
+          font-size: 0.7rem;
+          line-height: 0.7rem;
+          color: white;
+          background: $primaryDark;
+          border-radius: 0.3rem;
+          top: 0.1rem;
+          text-align: center;
+          left: 2.5rem;
+          padding: 0.5rem 1rem;
+          transition: all 0.2s ease;
+          animation: fadeIn 0.2s ease;
+        }
+        &:hover::before {
+          content: "";
+          position: absolute;
+          border-style: solid;
+          left: 1.9rem;
+          top: 0.6rem;
+          border-width: 5px 15px 5px 0;
+          border-color: transparent $primaryDark transparent transparent;
+          transform: rotate(0deg);
+        }
+
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
+        }
+      }
+    }
+  }
+}

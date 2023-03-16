@@ -14,6 +14,7 @@ const Header = () => {
         </h2>
         <nav>
           <NavLink to="/">Home</NavLink>
+          <NavLink to="/wishlist">Wishlist</NavLink>
           <NavLink to="cart">
             <AiOutlineShoppingCart />
             <p>{items.length > 0 ? items.length : 0}</p>

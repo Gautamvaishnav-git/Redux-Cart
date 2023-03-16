@@ -39,7 +39,7 @@ header {
       font-weight: 300;
       transition: all 0.2s ease;
       font-size: 1.2rem;
-      text-transform: uppercase;
+      text-transform: capitalize;
       position: relative;
 
       &:hover {
