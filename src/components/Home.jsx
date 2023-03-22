@@ -5,6 +5,7 @@ const Home = () => {
   const [list, setList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [fetchError, setFetchError] = useState(false);
+
   const fetchData = useCallback(async () => {
     try {
       let data = await fetch("https://fakestoreapi.com/products");
@@ -18,9 +19,7 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
-    setTimeout(() => {
-      fetchData();
-    }, 1000);
+    fetchData();
   }, []);
 
   if (fetchError) return <p>Fetch Error!</p>;

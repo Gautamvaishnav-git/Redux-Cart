@@ -3,7 +3,6 @@ import {
   handleAddToCart,
   handleDec,
   handleDelete,
-  handleGetTotal,
   handleInc,
 } from "./cartReducerFunc";
 

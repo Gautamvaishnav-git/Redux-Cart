@@ -21,9 +21,7 @@ const handleDec = (state, action) => {
 
 const handleDelete = (state, action) => {
   let id = action.payload;
-  state.items = state.items.filter((item) => {
-    return item.id !== id;
-  });
+  state.items = state.items.filter((item) => item.id !== id);
   handleGetTotal(state, action);
 };
 

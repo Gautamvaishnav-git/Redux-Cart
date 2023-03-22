@@ -54,21 +54,37 @@
     &:hover {
       scale: 1.05;
     }
-    button {
-      padding: 0.5rem 1rem;
-      background: $secondary;
-      border: 0;
-      outline: 0;
-      border-radius: 3px;
-      color: $tertiary;
-      border: 1px solid transparent;
-      transition: all 0.2s ease;
-      cursor: pointer;
-
-      &:hover {
+    .buttons {
+      display: flex;
+      gap: 0.5rem;
+      button:nth-child(1) {
         background: transparent;
-        border-color: $secondary;
-        color: #000;
+        color: $secondary;
+        font-size: 1.5rem;
+        padding: 0.2rem 0.5rem 0 0.5rem;
+        border-radius: 100%;
+
+        &:hover {
+          background: $secondary;
+          color: white;
+        }
+      }
+      button {
+        padding: 0.5rem 1rem;
+        background: $secondary;
+        border: 0;
+        outline: 0;
+        border-radius: 3px;
+        color: $tertiary;
+        border: 1px solid transparent;
+        transition: all 0.2s ease;
+        cursor: pointer;
+
+        &:hover {
+          background: transparent;
+          border-color: $secondary;
+          color: #000;
+        }
       }
     }
   }
