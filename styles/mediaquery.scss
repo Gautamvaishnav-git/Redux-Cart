@@ -1,4 +1,4 @@
-@media screen and (627px < width <= 786px) {
+@media screen and (width <= 786px) {
   header {
     position: static;
   }
@@ -8,7 +8,20 @@
   }
 }
 
-@media screen and (400px <width <= 627px) {
+@media screen and (width <= 627px) {
+  .wishlistContainer {
+    padding: 2rem;
+    > .cartItem {
+      width: 100%;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+  }
+  .Logo {
+    > span {
+      display: none;
+    }
+  }
   header {
     position: static;
   }
@@ -32,6 +45,18 @@
 }
 
 @media screen and (width <= 400px) {
+  .wishlistContainer {
+    padding: 0.5rem;
+    > .cartItem {
+      width: 100%;
+      grid-template-columns: 1fr;
+    }
+  }
+  .Logo {
+    > span {
+      display: none;
+    }
+  }
   .home > .product {
     padding: 1rem;
     margin: 1rem;
@@ -72,5 +97,12 @@
 @media screen and (width > 1240px) {
   .cart {
     height: 100%;
+  }
+  .wishlistContainer {
+    width: 50%;
+    padding: 0.5rem;
+    > .cartItem {
+      width: 100%;
+    }
   }
 }

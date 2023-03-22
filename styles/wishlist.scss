@@ -1,19 +1,25 @@
 @import "./mixins";
 
 .wishlistContainer {
-  width: 100%;
-  padding: 2rem;
   @include cartItem;
+  width: 100%;
+  margin: auto;
+  padding: 2rem;
   .cartItem {
+    margin: 1rem 0;
     width: 70%;
     .removeFromWishlist {
       display: flex;
       height: 100%;
       padding: 2rem 0;
       justify-content: flex-end;
-      i {
+      button {
+        color: $secondary;
         cursor: pointer;
         font-size: 2rem;
+        outline: none;
+        border: none;
+        background: transparent;
         position: relative;
         height: fit-content;
         &:hover::after {
@@ -38,8 +44,8 @@
           position: absolute;
           border-style: solid;
           left: 1.9rem;
-          top: 0.6rem;
-          border-width: 5px 15px 5px 0;
+          top: 0.5rem;
+          border-width: 8px 16px 8px 0;
           border-color: transparent $primaryDark transparent transparent;
           transform: rotate(0deg);
         }
