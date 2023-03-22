@@ -38,21 +38,22 @@
     color: $secondary;
     display: flex;
     flex-direction: column;
-    width: 200px;
+    width: 250px;
     flex-grow: 1;
     transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     align-items: flex-start;
     border-radius: 5px;
-    margin: 2rem;
+    margin: 1rem;
     gap: 0.5rem;
 
     > img {
-      width: 100%;
-      height: 100%;
+      width: 50%;
+      height: 50%;
+      margin: auto;
       object-fit: contain;
     }
     &:hover {
-      scale: 1.05;
+      scale: 1.03;
     }
     .buttons {
       display: flex;
